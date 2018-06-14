@@ -29,9 +29,11 @@ void MakeLeftSubTree(BTreeNode* main, BTreeNode* bt);
 void MakeRightSubTree(BTreeNode* main, BTreeNode* bt);
 
 typedef void VisitFuncPtr(BTData data);
+typedef void DeleteFuncPrt(BTreeNode* bt);
 
 void PreorderTraverse(BTreeNode* bt, VisitFuncPtr action);
 void InorderTraverse(BTreeNode* bt, VisitFuncPtr action);
 void PostorderTraverse(BTreeNode* bt, VisitFuncPtr action);
+void DeleteTree(BTreeNode* bt, DeleteFuncPrt action);
 
 #endif /* BinaryTree2_h */

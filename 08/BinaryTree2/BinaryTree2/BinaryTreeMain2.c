@@ -6,9 +6,11 @@
 //  Copyright © 2018년 developer119. All rights reserved.
 //
 #include <stdio.h>
+#include <stdlib.h>
 #include "BinaryTree2.h"
 
 void ShowIntData(int data);
+void ShowDeleteTree(BTreeNode* bt);
 
 int main(void)
 {
@@ -38,10 +40,18 @@ int main(void)
     printf("\n");
     PostorderTraverse(bt1, ShowIntData);
     printf("\n");
+    
+    DeleteTree(bt1, ShowDeleteTree);
     return 0;
 }
 
 void ShowIntData(int data)
 {
     printf("%d ", data);
+}
+
+void ShowDeleteTree(BTreeNode* bt)
+{
+    printf("Delete Tree : %d \n", bt->data);
+    free(bt);
 }
