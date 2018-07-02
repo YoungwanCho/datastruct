@@ -3,51 +3,58 @@
 
 int main(void)
 {
-    /*** ArrayListÀÇ »ı¼º ¹× ÃÊ±âÈ­ ***/
     List list;
     int data;
     ListInit(&list);
     
-    /*** 5°³ÀÇ µ¥ÀÌÅÍ ÀúÀå ***/
-    LInsert(&list, 11);  LInsert(&list, 11);
-    LInsert(&list, 22);  LInsert(&list, 22);
-    LInsert(&list, 33);
-    
-    /*** ÀúÀåµÈ µ¥ÀÌÅÍÀÇ ÀüÃ¼ Ãâ·Â ***/
-    printf("ÇöÀç µ¥ÀÌÅÍÀÇ ¼ö: %d \n", LCount(&list));
-    
-    if(LFirst(&list, &data))    // Ã¹ ¹øÂ° µ¥ÀÌÅÍ Á¶È¸
+    // 1. ë¦¬ìŠ¤íŠ¸ë¥¼ ìƒì„± ë° ì´ˆê¸°í™” í•œë‹¤ìŒ ì •ìˆ˜ 1 ë¶€í„° 9ê¹Œì§€ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥í•œë‹¤.
+    int i=0;
+    for(i=1; i<=9; i++)
     {
-        printf("%d ", data);
-        
-        while(LNext(&list, &data))    // µÎ ¹øÂ° ÀÌÈÄÀÇ µ¥ÀÌÅÍ Á¶È¸
-            printf("%d ", data);
+        data = i;
+        LInsert(&list, data);
     }
-    printf("\n\n");
     
-    /*** ¼ıÀÚ 22À» Å½»öÇÏ¿© ¸ğµÎ »èÁ¦ ***/
+    // 2. ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ëœ ê°’ì„ ìˆœì°¨ì ìœ¼ë¡œ ì°¸ì¡°í•˜ì—¬ ê·¸ í•©ì„ ê³„ì‚°í•˜ì—¬ ì¶œë ¥í•œë‹¤.
+    int totalValue = 0;
+    data = 0;
     if(LFirst(&list, &data))
     {
-        if(data == 22)
-            LRemove(&list);
-        
-        while(LNext(&list, &data))
+        totalValue += data;
+        while (LNext(&list, &data))
         {
-            if(data == 22)
-                LRemove(&list);
+            totalValue += data;
         }
     }
     
-    /*** »èÁ¦ ÈÄ ÀúÀåµÈ µ¥ÀÌÅÍ ÀüÃ¼ Ãâ·Â ***/
-    printf("ÇöÀç µ¥ÀÌÅÍÀÇ ¼ö: %d \n", LCount(&list));
+    printf("Total Value : %d\n", totalValue);
     
+    // 3. ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ëœ ê°’ë“¤ì¤‘ 2ì˜ ë°°ìˆ˜ì™€ 3ì˜ ë°°ìˆ˜ì— í•´ë‹¹ ë˜ëŠ” ê°’ì„ ëª¨ë‘ ì‚­ì œ í•œë‹¤.
     if(LFirst(&list, &data))
     {
-        printf("%d ", data);
+        if(data % 2 == 0 || data % 3 == 0)
+        {
+            LRemove(&list);
+        }
         
-        while(LNext(&list, &data))
-            printf("%d ", data);
+        while (LNext(&list, &data))
+        {
+            if(data % 2 == 0 || data % 3 == 0)
+            {
+                LRemove(&list);
+            }
+        }
     }
-    printf("\n\n");
+    
+    // 4. ë§ˆì§€ë§‰ìœ¼ë¡œ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ëœ ë°ì´í„°ë¥¼ ìˆœì„œëŒ€ë¡œ ì¶œë ¥í•œë‹¤.
+    if(LFirst(&list, &data))
+    {
+        printf("%d\n", data);
+        while (LNext(&list, &data))
+        {
+            printf("%d\n", data);
+        }
+    }
+    
     return 0;
 }
